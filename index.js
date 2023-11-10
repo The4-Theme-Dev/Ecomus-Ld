@@ -288,12 +288,12 @@ const app = {
         options: {
           easing: "linear",
           type: "loop",
-          pauseOnHover: true,
+          pauseOnHover: false,
           autoplay: true,
           autoWidth: true,
           arrows: false,
           interval: 0,
-          speed: 3000,
+          speed: 10000,
           pagination: false,
           gap: "45px",
           breakpoints: {
@@ -308,12 +308,12 @@ const app = {
         options: {
           easing: "linear",
           type: "loop",
-          pauseOnHover: false,
+          pauseOnHover: true,
           autoplay: true,
           autoWidth: true,
           arrows: false,
           interval: 0,
-          speed: 10000,
+          speed: 3000,
           pagination: false,
           gap: "34px",
           breakpoints: {
@@ -331,6 +331,37 @@ const app = {
         // console.log(item.options);
         new Splide(`${item.id}`, item.options).mount();
       })
+      new Splide('#grid_layout_slider', {
+        easing: "linear",
+        type: "loop",
+        pauseOnHover: true,
+        autoplay: true,
+        autoWidth: true,
+        arrows: false,
+        interval: 0,
+        speed: 3000,
+        pagination: false,
+        gap: "15px",
+        breakpoints: {
+          1366: {
+            perPage: 3,
+            autoWidth: false,
+          },
+          1024: {
+            perPage: 3, 
+            autoWidth: false,
+          },
+          768: {
+            perPage: 3, 
+            autoWidth: false,
+            gap:'5px'
+          },
+          525:{
+            perPage: 2,
+            autoWidth: false,
+          }
+        }
+      }).mount();
     })
   },
   tabs_shop: () => {
@@ -493,9 +524,9 @@ const app = {
 
     const video = () => {
       // add target_blank a tag
-      if (window.innerWidth <= 768) {
-        $('.popup_youtube').attr('target', '_blank');
-      }
+      // if (window.innerWidth <= 768) {
+      //   $('.popup_youtube').attr('target', '_blank');
+      // }
       // active video when hover
       if (window.innerWidth > 768) {
         $('#section_video').on('mouseover', 'video', function () {
@@ -506,32 +537,31 @@ const app = {
 
         });
       } else {
-        $('#section_video').on('click', '.video-trigger-mobile', function () {
+        $('#section_video').on('mouseover', '.video-trigger-mobile', function () {
           $('.video-item').find('video').trigger('pause');
           $('.video-item.is-hover').removeClass('is-hover');
           let id = $(this).data('trigger');
           $(id).addClass('is-hover');
           $(id).find('video').trigger('play');
-
         })
       }
     }
     $(document).on('DOMContentLoaded', function () {
       $('.popup_youtube').magnificPopup({
-        disableOn: 768,
+        // disableOn: 768,
         type: 'iframe',
         mainClass: 'mfp-fade',
         removalDelay: 160,
         preloader: false,
         fixedContentPos: false,
-        callbacks: {
-          open: function () {
-            $('.video-item').find('video').trigger('pause');
-          },
-          close: function () {
-            $('.video-item.is-hover').find('video').trigger('play');
-          }
-        },
+        // callbacks: {
+        //   open: function () {
+        //     $('.video-item').find('video').trigger('pause');
+        //   },
+        //   close: function () {
+        //     $('.video-item.is-hover').find('video').trigger('play');
+        //   }
+        // },
       });
       video();
     });
@@ -581,6 +611,19 @@ const app = {
       })
     })
   },
+  reveal:()=>{
+    const reveal= ()=>{
+      let reveals = document.querySelectorAll('[reveal]');
+      console.log(reveals);
+      if(reveals){
+        console.log("Reveal is working");
+      }else{
+        console.log("Reveal is not working because not find the item ");
+      }
+    }
+    $(window).on('scroll', reveal())
+    
+  },
   start: () => {
     console.log("App start ...");
     app.header_sticky();
@@ -601,6 +644,7 @@ const app = {
     app.video_popup();
     app.counter_number();
     app.swatch_color();
+    app.reveal();
   },
 };
 
