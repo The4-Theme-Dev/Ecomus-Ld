@@ -2144,14 +2144,16 @@ header {
 }
 
 .video-item .video-info {
-  height: 0;
   transition: .35s ease;
   padding-right: 10px;
+  transform: scale(0);
+  transform-origin: top left;
 }
 
 .video-item.is-hover .video-info {
   height: auto;
-
+  transform: scale(1);
+  transition: .35s ease .35s;
 }
 
 .video-info a {
