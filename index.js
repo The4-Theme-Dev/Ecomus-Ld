@@ -232,7 +232,6 @@ const app = {
     }
   },
   filter: () => {
-    $(document).on('DOMContentLoaded', function () {
       let $grid = $("#isotope").isotope({
         itemSelector: ".isotope-item",
         layoutMode: "fitRows",
@@ -242,7 +241,7 @@ const app = {
         let filterValue = $(this).attr("data-filter");
         $grid.isotope({ filter: filterValue });
       });
-    })
+
   },
   tabs: () => {
     $("[filter-tabs]").on("click", "button", function () {
@@ -255,7 +254,7 @@ const app = {
     })
   },
   empower_masonry: () => {
-    $(document).on('DOMContentLoaded', function () {
+   
       $(".empower_grid").isotope({
         layoutMode: "packery",
         itemSelector: ".col",
@@ -264,7 +263,7 @@ const app = {
         layoutMode: "packery",
         itemSelector: ".col",
       });
-    })
+
   },
   splider: () => {
     const splides = [
@@ -326,7 +325,6 @@ const app = {
         }
       }
     ]
-    $(document).on('DOMContentLoaded', function () {
       splides.map(item => {
         // console.log(item.options);
         new Splide(`${item.id}`, item.options).mount();
@@ -362,10 +360,9 @@ const app = {
           }
         }
       }).mount();
-    })
   },
   tabs_shop: () => {
-    $(document).on('DOMContentLoaded', function () {
+    
       new Splide('#tabs_shop_splide-1', {
         type: 'loop',
         perPage: 3,
@@ -442,8 +439,8 @@ const app = {
           }
         }
       }).mount();
-    });
-    $(document).on('DOMContentLoaded', function () {
+
+    
 
       $('#tabs_demo').on('click', 'button', function () {
         $('#tabs_demo').find('button.is-active').removeClass('is-active');
@@ -453,15 +450,15 @@ const app = {
         // console.log(id);
         $(`#${id}`).addClass('control-active')
       })
-    })
+
   },
   table: () => {
-    $(document).on('DOMContentLoaded', function () {
+   
 
       $('#table_viewmore').on('click', function () {
         $('#total_wrap').addClass('view-more-active')
       })
-    })
+
 
   },
   galaxy: () => {
@@ -485,20 +482,23 @@ const app = {
           "animation-name:" + star_rotation + "; animation-duration: " + star_duration + "s;background-color:#" + randomColor + "'></div>";
       }
     };
-    $(document).on('DOMContentLoaded', function () {
-      createStars();
-    })
-
+    createStars();
   },
   text_circle: () => {
     const str = "highconverting";
     const text = $('#text-circle');
     // console.log(text);
-    $(document).on('DOMContentLoaded', function () {
-      for (let i = 0; i < str.length; i++) {
-        text.append(`<span style="transform:rotate(${26 * i}deg)">${str[i]}</span>`);
-      }
-    })
+    for (let i = 0; i < str.length; i++) {
+      text.append(`<span style="transform:rotate(${26 * i}deg)">${str[i]}</span>`);
+    }
+
+
+    const str2 = "one-time payment";
+    const text2 = $('#payment_circle');
+    // console.log(text);
+    for (let i = 0; i < str2.length; i++) {
+      text2.append(`<span style="transform:rotate(${9 * i}deg)">${str2[i]}</span>`);
+    }
   },
   back_to_top: () => {
     let btn = $('back-to-top');
@@ -510,19 +510,13 @@ const app = {
         btn.removeClass('show');
       }
     });
-
-    $(document).on('DOMContentLoaded', function () {
-
       btn.on('click', function () {
         $('html, body').animate({ scrollTop: 0 }, '0');
       });
-    })
-
-
   },
-  video_popup: () => {
+  video_popup: (config) => {
 
-    const video = () => {
+    const video = (config) => {
       // add target_blank a tag
       // if (window.innerWidth <= 768) {
       //   $('.popup_youtube').attr('target', '_blank');
@@ -537,6 +531,11 @@ const app = {
 
         });
       } else {
+        if(config.video.disable_mobile){
+          console.log("Disable video on mobile");
+          $('#section_video').addClass('disable_mobile');
+          return;
+        }
         $('#section_video').on('mouseover', '.video-trigger-mobile', function () {
           $('.video-item').find('video').trigger('pause');
           $('.video-item.is-hover').removeClass('is-hover');
@@ -546,7 +545,7 @@ const app = {
         })
       }
     }
-    $(document).on('DOMContentLoaded', function () {
+   
       $('.popup_youtube').magnificPopup({
         // disableOn: 768,
         type: 'iframe',
@@ -563,56 +562,64 @@ const app = {
         //   }
         // },
       });
-      video();
-    });
+      video(config);
   },
   counter_number: () => {
     // cau truc
     // 
     // <counter>
-    //   <div counter-value data-count="400">0</div>
+    //   <div counter-value data-count="400" data-duration="1000">0</div>
     // </counter>
     // 
-
-    let a = 0;
     $(window).scroll(function () {
-      var oTop = $('counter').offset().top - window.innerHeight;
-      if (a == 0 && $(window).scrollTop() > oTop) {
-        $('[counter-value]').each(function () {
-          var $this = $(this),
-            countTo = $this.data('count');
-          $({
-            countNum: $this.text()
-          }).animate({
-            countNum: countTo
-          },
-            {
-              duration: $this.data('duration'),
-              easing: 'swing',
-              step: function () {
-                $this.text(Math.floor(this.countNum));
-              },
-              complete: function () {
-                $this.text(this.countNum);
-                //alert('finished');
-              }
-
-            });
-        });
-        a = 1;
-      }
+      $('counter').each(function(){
+        var oTop = $(this).offset().top - window.innerHeight;
+        console.log("Check number counter: ",$(window).scrollTop() > oTop);
+        if ($(window).scrollTop() > oTop) {
+          // console.log($(this).find('[counter-value]'));
+          $(this).find('[counter-value]').each(function () {
+            var $this = $(this),
+              countTo = $this.data('count');
+            $({
+              countNum: $this.text()
+            }).animate({
+              countNum: countTo
+            },
+              {
+                duration: $this.data('duration'),
+                easing: 'swing',
+                step: function () {
+                  $this.text(Math.floor(this.countNum));
+                },
+                complete: function () {
+                  $this.text(this.countNum);
+                  //alert('finished');
+                }
+  
+              });
+          });
+        }
+      })
     });
   },
   swatch_color: () => {
-    $(document).on('DOMContentLoaded', function () {
       $('.swatch_color').on('click', 'button', function () {
         $(this).parents().find('button.is-selected').removeClass('is-selected');
         $(this).addClass('is-selected');
       })
-    })
   },
-  reveal: () => {
-    const reveal = () => {
+  reveal: (config) => {
+    // structor
+    // <div>
+    //  <div reveal>
+    //    code html
+    //  </div>
+    // </div> 
+    
+    const reveal = (config) => {
+      if(!config.reveal.enable){
+        return
+      }
       let reveals = document.querySelectorAll('[reveal]');
       if (reveals) {
         console.log("Reveal is working");
@@ -620,46 +627,107 @@ const app = {
         console.log("Reveal is not working because not find the item ");
         return;
       }
-      $(window).on('scroll', function () {
-        reveals.forEach((el) => {
-          const windowHeight = window.innerHeight;
-          const revealTop = el.getBoundingClientRect().top;
-          const elHeight = $(this).height();
-          const revealPoint = 150;
-          const posPoint = 40;
-          el.parentElement.style.perspective = '700px';
-          el.parentElement.style.transformStyle= 'preserve-3d';
-          el.parentElement.style.perspectiveOrigin = '100% 0%';
-          el.style.transformOrigin = '50% 0';
-          el.style.translate = 'none';
-          el.style.rotate = 'none';
-          el.style.scale = 'none';
-          el.style.transition = 'all .35s ease';
-          // console.log(revealTop > windowHeight - revealPoint);
-          if(revealTop > windowHeight - revealPoint){
-            el.style.opacity = '0';
-            el.style.transform = `rotateX(-${posPoint}deg)`
-          }
-          if (revealTop < windowHeight - revealPoint) {
-            if(revealTop > -50){
-              let schemas = Math.abs(1 - revealTop / elHeight);
-              let opacity = Math.min((Math.abs(1 - (revealTop - 350) / elHeight)), 1);
-              let rotate =  Math.min((posPoint * schemas - (posPoint - 10)),0)
-              el.style.opacity = `${opacity}`;
-              el.style.transform = `translate3d(0px,0px,0px) rotateX(${rotate}deg)`
+      if(window.innerWidth > 768){
+        $(window).on('scroll', function () {
+          reveals.forEach((el) => {
+            const windowHeight = window.innerHeight;
+            const revealTop = el.getBoundingClientRect().top;
+            const elHeight = $(this).height();
+            const revealPoint = 150;
+            // position & speed 
+            const posPoint = 20;
+            // attr parent
+            el.parentElement.style.perspective = '700px';
+            el.parentElement.style.transformStyle= 'preserve-3d';
+            el.parentElement.style.perspectiveOrigin = '100% 0%';
+            // attr node
+            el.style.transformOrigin = '50% 0';
+            el.style.translate = 'none';
+            el.style.rotate = 'none';
+            el.style.scale = 'none';
+            el.style.transition = 'all .35s ease';
+            // console.log(revealTop > windowHeight - revealPoint);
+            if(revealTop > windowHeight - revealPoint){
+              el.style.opacity = '0';
+              el.style.transform = `rotateX(-${posPoint}deg)`
             }
-            else{
-              el.style.transform = `translate(0,0)`
+            if (revealTop < windowHeight - revealPoint) {
+              if(revealTop > -50){
+                let schemas = Math.abs(1 - revealTop / elHeight);
+                let opacity = Math.min((Math.abs(1 - (revealTop - 350) / elHeight)), 1);
+                let rotate =  Math.min((posPoint * schemas - (posPoint - 10)),0)
+                el.style.opacity = `${opacity}`;
+                el.style.transform = `translate3d(0px,0px,0px) rotateX(${rotate}deg)`
+              }
+              else{
+                el.style.transform = `translate(0,0)`
+              }
             }
-          }
-          
+            
+          })
         })
-      })
+      }
     }
-    reveal()
+    reveal(config)
+
+  },
+  popup:()=>{
+    $('[name="grid_popup"]').on('click',function(e){
+
+      e.preventDefault();
+
+      const parent = $(this).parent();
+      const popup_html = $('popup');
+      let p_obj = {
+        title: parent.find('.title').text(),
+        des: parent.find('.des').text(),
+        data_img: parent.find('img').data('src'),
+      }
+     
+      popup_html.find('.title').text(p_obj.title);
+      popup_html.find('.des').text(p_obj.des);
+
+      if(p_obj.data_img){
+        popup_html.find('img').attr('src',p_obj.data_img);
+      }
+      openPopup();
+    })
+    const openPopup=()=>{
+      $('popup').css('display','block');
+    }
+    const closePopup=()=>{
+      $('popup').css('display','none');
+      $('popup .content_inner').html(popup_original);
+    }
+    //  close popup 
+    $('popup .popup-close,popup .overlay').on('click',function(){
+      closePopup();
+    })
+    const popup_original = ` <div class="img_wrap">
+          <div class="hdt-ratio" style="--aspect-ratioapt: 872/503;">
+            <img src="./assets/images/b_ecomus/10.png" alt="">
+          </div>
+        </div>
+        <h3 class="title">Optimize your Shop Store for millions of mobile shoppers</h3>
+        <p class="des">Creating custom layouts for your online store is easier than ever with flex sections. We leverage CSS Flexbox, which allows for more
+          multi-directional responsive layouts, and easy content alignment within sections of your store. Now you can simply drag and drop, re-size, group, and edit for a store that’s uniquely yours.</p>
+        <div class="group-btn">
+          <a href="#" target="_blank" class="hdt-btn-hover-icon docs">How to use it
+            <svg class="hdt-icon" viewBox="0 0 24 24" focusable="false" width="16" height="16"><path fill="currentColor" d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"></path></svg>
+          </a>
+          <a href="#" class="buy" target="_blank">Buy theme - $19</a>
+        </div>`
 
   },
   start: () => {
+    const config={
+      video:{
+        disable_mobile: true
+      },
+      reveal:{
+        enable: true
+      }
+    }
     console.log("App start ...");
     app.header_sticky();
     app.header_change_bg();
@@ -676,11 +744,15 @@ const app = {
     app.text_circle();
     app.tabs_shop();
     app.back_to_top();
-    app.video_popup();
+    app.video_popup(config);
     app.counter_number();
     app.swatch_color();
-    app.reveal();
+    app.reveal(config);
+    app.popup();
+    
+    new WOW().init();
   },
 };
 
 app.start();
+
