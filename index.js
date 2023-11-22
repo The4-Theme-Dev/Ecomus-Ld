@@ -1,5 +1,6 @@
 const app = {
   header_sticky: () => {
+    console.log("Header sticky is active");
     // Hide header on scroll down
     let didScroll;
     let lastScrollTop = 0;
@@ -46,190 +47,77 @@ const app = {
       }
     });
   },
-  nav_on_mb: () => {
-    $(window).on("load", function () {
-      if ($(window).width() < 1025) {
-        $("[append-body]").appendTo("body");
-      } else {
-        $("[append-body]").appendTo(".hdt-nav");
-      }
-    });
-    $(window).on("resize", function () {
-      if ($(window).width() < 1025) {
-        $("[append-body]").appendTo("body");
-      } else {
-        $("[append-body]").appendTo(".hdt-nav");
-      }
-    });
-  },
   open_menu_mb: () => {
-    $(".hdt-nav_button").on("click", function () {
-      $(".hdt-menu_nav").addClass("open");
-    });
-    $(".close-menu").on("click", function () {
-      $(".hdt-menu_nav").removeClass("open");
-    });
-    $(".overlay").on("click", function () {
-      $(".hdt-menu_nav").removeClass("open");
-    });
-    $(window).on("resize", function () {
-      if ($(window).width() > 1023) {
-        $(".hdt-menu_nav").removeClass("open");
-      }
-    });
+    // open menu mobile
+    $('#open_menu_mb').on('click',function(){
+      $('sidebar_menu_mb').addClass('active')
+    })
+    // close menu mobile when click button && close menu when click overlay && click brand logo
+    $('sidebar_menu_mb .close_btn,sidebar_menu_mb .overlay,sidebar_menu_mb .brand_logo a').on('click',function(){
+      $('sidebar_menu_mb').removeClass('active')
+    })
+    //  active link when click
+    $('sidebar_menu_mb .hdt-nav_link').on('click',function(){
+      $('sidebar_menu_mb .hdt-nav_link.active').removeClass('active');
+      $(this).addClass('active');
+      $('sidebar_menu_mb').removeClass('active')
+    })
+    // 
   },
   cursor: () => {
-    $(window).on('load', function () {
+    console.log("Cursor glowing is active");
+    // hiden when stop moving
+    let timer;
+    const mouse_stop=()=>{
+      $('cursor').find('.cursor-glow canvas').removeClass('opacity-1');
+      $('cursor').find('.cursor-glow canvas').addClass('opacity-0');
+    }
+    const mouse_on=()=>{
+      $('cursor').find('.cursor-glow canvas').removeClass('opacity-0');
+      $('cursor').find('.cursor-glow canvas').addClass('opacity-1');
+    }
+    const glow =()=>{
+      const canvas = document.getElementById("myCanvas");
+      const ctx = canvas.getContext("2d");
+      // Create a radial gradient
+      // The inner circle is at x=110, y=90, with radius=0
+      // The outer circle is at x=100, y=100, with radius=50
+      // x, y la toa do x/y tren document
+      const gradient = ctx.createRadialGradient(800, 800, 0, 800, 800, 400);
+      // console.log(gradient);
+      // Add color stops
+      gradient.addColorStop(0,"rgba(21,137,255, .11)");
+      gradient.addColorStop(0.1,"rgba(21,137,255, .10)");
+      gradient.addColorStop(0.2,"rgba(21,137,255, .09)");
+      gradient.addColorStop(0.3,"rgba(21,137,255, .08)");
+      gradient.addColorStop(0.4,"rgba(21,137,255, .07)");
+      gradient.addColorStop(0.5,"rgba(21,137,255, .06)");
+      gradient.addColorStop(0.6,"rgba(21,137,255, .05)");
+      gradient.addColorStop(0.7,"rgba(21,137,255, .04)");
+      gradient.addColorStop(0.8,"rgba(21,137,255, .03)");
+      gradient.addColorStop(0.9,"rgba(21,137,255, .02)");
+      gradient.addColorStop(1,"transparent");
+      // Set the fill style and draw a rectangle
+      ctx.fillStyle = gradient;
+      // fillRect(x,y,z,k)
+      // x,y: toa do bat dau
+      // z,k: chieu rong / chieu cao cua filter
+      ctx.fillRect(0, 0, 1600, 1600);
+    }
+    // start glow
+    glow();
+    if(window.innerWidth > 1149){
       document.addEventListener("mousemove", (e) => {
-        // console.log(e.clientX,e.clientY);
-        // $('#cursor').style.top = e.clientY + `px`;
-        // $('#cursor').style.left = e.clientX + `px`;
-        $('#cursor').css({ 'top': `${e.clientY}px`, 'left': `${e.clientX}px` })
-      });
-    })
-  },
-  cursor2: () => {
-    const cursorOuter = document.querySelector(".cursor--large");
-    const cursorInner = document.querySelector(".cursor--small");
-    const cursorTextContainerEl = document.querySelector(".cursor--text");
-    const cursorTextEl = cursorTextContainerEl.querySelector(".text");
-
-    const hoverItems = document.querySelectorAll(".cursor-hover-item");
-    const hoverEffectDuration = 0.3;
-    let isHovered = false;
-    let initialCursorHeight;
-
-    const cursorRotationDuration = 8;
-
-    let circleType = new CircleType(cursorTextEl);
-    circleType.radius(50);
-
-    setTimeout(() => {
-      initialCursorHeight =
-        circleType.container.style.getPropertyValue("height");
-      console.log(initialCursorHeight);
-    }, 50);
-
-    hoverItems.forEach((item) => {
-      item.addEventListener("pointerenter", handlePointerEnter);
-      item.addEventListener("pointerleave", handlePointerLeave);
-    });
-
-    let mouse = {
-      x: -100,
-      y: -100,
-    };
-
-    document.body.addEventListener("pointermove", updateCursorPosition);
-
-    function updateCursorPosition(e) {
-      mouse.x = e.clientX;
-      mouse.y = e.clientY;
-    }
-
-    function updateCursor() {
-      gsap.set([cursorInner, cursorTextContainerEl], {
-        x: mouse.x,
-        y: mouse.y,
-      });
-
-      gsap.to(cursorOuter, {
-        duration: 0.15,
-        x: mouse.x,
-        y: mouse.y,
-      });
-
-      if (!isHovered) {
-        gsap.to(cursorTextContainerEl, hoverEffectDuration * 0.5, {
-          opacity: 0,
-        });
-        gsap.set(cursorTextContainerEl, {
-          rotate: 0,
-        });
-      }
-
-      requestAnimationFrame(updateCursor);
-    }
-
-    updateCursor();
-
-    function handlePointerEnter(e) {
-      isHovered = true;
-
-      const target = e.currentTarget;
-      updateCursorText(target);
-
-      gsap.set([cursorTextContainerEl, cursorTextEl], {
-        height: initialCursorHeight,
-        width: initialCursorHeight,
-      });
-
-      gsap.fromTo(
-        cursorTextContainerEl,
-        {
-          rotate: 0,
-        },
-        {
-          duration: cursorRotationDuration,
-          rotate: 360,
-          ease: "none",
-          repeat: -1,
-        }
-      );
-
-      gsap.to(cursorInner, hoverEffectDuration, {
-        scale: 2,
-      });
-
-      gsap.fromTo(
-        cursorTextContainerEl,
-        hoverEffectDuration,
-        {
-          scale: 1.2,
-          opacity: 0,
-        },
-        {
-          delay: hoverEffectDuration * 0.75,
-          scale: 1,
-          opacity: 1,
-        }
-      );
-      gsap.to(cursorOuter, hoverEffectDuration, {
-        scale: 1.2,
-        opacity: 0,
+        mouse_on();
+        clearTimeout(timer);
+        timer=setTimeout(mouse_stop,300);
+        let x = e.clientX;
+        let y = e.clientY;
+  
+        $('.cursor-glow canvas').css({'top':y,'left':x})
       });
     }
-
-    function handlePointerLeave() {
-      isHovered = false;
-      gsap.to([cursorInner, cursorOuter], hoverEffectDuration, {
-        scale: 1,
-        opacity: 1,
-      });
-    }
-
-    function updateCursorText(textEl) {
-      const cursorTextRepeatTimes = textEl.getAttribute(
-        "data-cursor-text-repeat"
-      );
-      const cursorText = returnMultipleString(
-        textEl.getAttribute("data-cursor-text"),
-        cursorTextRepeatTimes
-      );
-
-      circleType.destroy();
-
-      cursorTextEl.innerHTML = cursorText;
-      circleType = new CircleType(cursorTextEl);
-    }
-
-    function returnMultipleString(string, count) {
-      let s = "";
-      for (let i = 0; i < count; i++) {
-        s += ` ${string} `;
-      }
-      return s;
-    }
+ 
   },
   filter: () => {
       let $grid = $("#isotope").isotope({
@@ -268,21 +156,6 @@ const app = {
   splider: () => {
     const splides = [
       {
-        id: ".splide",
-        options: {
-          easing: "linear",
-          type: "loop",
-          pauseOnHover: true,
-          autoplay: true,
-          autoWidth: true,
-          arrows: false,
-          interval: 0,
-          speed: 3000,
-          pagination: false,
-          padding: 10,
-        }
-      },
-      {
         id: ".splide2",
         options: {
           easing: "linear",
@@ -292,7 +165,7 @@ const app = {
           autoWidth: true,
           arrows: false,
           interval: 0,
-          speed: 10000,
+          speed: 25000,
           pagination: false,
           gap: "45px",
           breakpoints: {
@@ -312,7 +185,7 @@ const app = {
           autoWidth: true,
           arrows: false,
           interval: 0,
-          speed: 3000,
+          speed: 7000,
           pagination: false,
           gap: "34px",
           breakpoints: {
@@ -329,7 +202,7 @@ const app = {
         // console.log(item.options);
         new Splide(`${item.id}`, item.options).mount();
       })
-      new Splide('#grid_layout_slider', {
+      new Splide('.grid_layout_slider', {
         easing: "linear",
         type: "loop",
         pauseOnHover: true,
@@ -523,6 +396,7 @@ const app = {
       // }
       // active video when hover
       if (window.innerWidth > 768) {
+        $('#video-3').addClass('is-hover')
         $('#section_video').on('mouseover', 'video', function () {
           $('.video-item').find('video').trigger('pause');
           $('.video-item.is-hover').removeClass('is-hover');
@@ -536,13 +410,6 @@ const app = {
           $('#section_video').addClass('disable_mobile');
           return;
         }
-        $('#section_video').on('mouseover', '.video-trigger-mobile', function () {
-          $('.video-item').find('video').trigger('pause');
-          $('.video-item.is-hover').removeClass('is-hover');
-          let id = $(this).data('trigger');
-          $(id).addClass('is-hover');
-          $(id).find('video').trigger('play');
-        })
       }
     }
    
@@ -574,7 +441,7 @@ const app = {
     $(window).scroll(function () {
       $('counter').each(function(){
         var oTop = $(this).offset().top - window.innerHeight;
-        console.log("Check number counter: ",$(window).scrollTop() > oTop);
+        // console.log("Check number counter: ",$(window).scrollTop() > oTop);
         if ($(window).scrollTop() > oTop) {
           // console.log($(this).find('[counter-value]'));
           $(this).find('[counter-value]').each(function () {
@@ -680,16 +547,15 @@ const app = {
       const popup_html = $('popup');
       let p_obj = {
         title: parent.find('.title').text(),
-        des: parent.find('.des').text(),
-        data_img: parent.find('img').data('src'),
+        des: parent.find('.des-hide').clone(),
+        data_img: parent.find('.img').clone(),
+        button: parent.find('.group-btn').clone(),
       }
-     
+      console.log(p_obj);
       popup_html.find('.title').text(p_obj.title);
-      popup_html.find('.des').text(p_obj.des);
-
-      if(p_obj.data_img){
-        popup_html.find('img').attr('src',p_obj.data_img);
-      }
+      popup_html.find('.des').html(p_obj.des);
+      popup_html.find('.button_wrap').html(p_obj.button);
+      popup_html.find('.img_wrap .img').html(p_obj.data_img)      
       openPopup();
     })
     const openPopup=()=>{
@@ -703,22 +569,47 @@ const app = {
     $('popup .popup-close,popup .overlay').on('click',function(){
       closePopup();
     })
-    const popup_original = ` <div class="img_wrap">
-          <div class="hdt-ratio" style="--aspect-ratioapt: 872/503;">
-            <img src="./assets/images/b_ecomus/10.png" alt="">
-          </div>
-        </div>
-        <h3 class="title">Optimize your Shop Store for millions of mobile shoppers</h3>
-        <p class="des">Creating custom layouts for your online store is easier than ever with flex sections. We leverage CSS Flexbox, which allows for more
-          multi-directional responsive layouts, and easy content alignment within sections of your store. Now you can simply drag and drop, re-size, group, and edit for a store that’s uniquely yours.</p>
-        <div class="group-btn">
-          <a href="#" target="_blank" class="hdt-btn-hover-icon docs">How to use it
-            <svg class="hdt-icon" viewBox="0 0 24 24" focusable="false" width="16" height="16"><path fill="currentColor" d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"></path></svg>
-          </a>
-          <a href="#" class="buy" target="_blank">Buy theme - $19</a>
-        </div>`
-
+    const popup_original = `<div class="wrap">
+    <div class="content_x">
+    <h3 class="title"></h3>
+    <div class="des"></div>
+    <div class="button_wrap"></div>
+    </div>  
+    <div class="img_wrap">
+    <div class="img hdt-ratio" style="--aspect-ratioapt: 928/503;">
+    </div>
+    </div>                  
+    </div>`
   },
+  logo_cta:()=>{
+    $('.logo_cta').on('click',function(e){
+      e.preventDefault();
+      $('html, body').animate({ scrollTop: 0 }, '0');
+      console.log("done");
+    })
+  },
+  scrollspy:()=>{
+    let sectionIds = $('a.scrollspy_s');
+    console.log("SCrollspy is active");
+    $(document).scroll(function(){
+        sectionIds.each(function(){
+            let container = $(this).attr('href');
+            let containerOffset = $(container).offset().top;
+            let containerHeight = $(container).outerHeight();
+            let containerBottom = containerOffset + containerHeight;
+            let scrollPosition = $(document).scrollTop();
+    
+            if(scrollPosition < containerBottom - 20 && scrollPosition >= containerOffset - 20){
+                $(this).addClass('active');
+            } else{
+                $(this).removeClass('active');
+            }
+    
+    
+        });
+    });
+  }
+  ,
   start: () => {
     const config={
       video:{
@@ -731,15 +622,12 @@ const app = {
     console.log("App start ...");
     app.header_sticky();
     app.header_change_bg();
-    app.nav_on_mb();
     app.open_menu_mb();
-    // app.cursor();
-    // app.cursor2();
     app.tabs();
     app.filter();
     app.empower_masonry();
     app.splider();
-    app.table();
+    // app.table();
     app.galaxy();
     app.text_circle();
     app.tabs_shop();
@@ -749,7 +637,10 @@ const app = {
     app.swatch_color();
     app.reveal(config);
     app.popup();
-    
+    app.logo_cta();
+    app.cursor();
+    app.scrollspy();
+
     new WOW().init();
   },
 };
