@@ -49,15 +49,15 @@ const app = {
   },
   open_menu_mb: () => {
     // open menu mobile
-    $('#open_menu_mb').on('click',function(){
+    $('#open_menu_mb').on('click', function () {
       $('sidebar_menu_mb').addClass('active')
     })
     // close menu mobile when click button && close menu when click overlay && click brand logo
-    $('sidebar_menu_mb .close_btn,sidebar_menu_mb .overlay,sidebar_menu_mb .brand_logo a').on('click',function(){
+    $('sidebar_menu_mb .close_btn,sidebar_menu_mb .overlay,sidebar_menu_mb .brand_logo a').on('click', function () {
       $('sidebar_menu_mb').removeClass('active')
     })
     //  active link when click
-    $('sidebar_menu_mb .hdt-nav_link').on('click',function(){
+    $('sidebar_menu_mb .hdt-nav_link').on('click', function () {
       $('sidebar_menu_mb .hdt-nav_link.active').removeClass('active');
       $(this).addClass('active');
       $('sidebar_menu_mb').removeClass('active')
@@ -66,17 +66,21 @@ const app = {
   },
   cursor: () => {
     console.log("Cursor glowing is active");
+    if (window.innerWidth < 1149) {
+      console.log("Cursor glowing is disable on tablet & mobile");
+      return;
+    }
     // hiden when stop moving
     let timer;
-    const mouse_stop=()=>{
+    const mouse_stop = () => {
       $('cursor').find('.cursor-glow canvas').removeClass('opacity-1');
       $('cursor').find('.cursor-glow canvas').addClass('opacity-0');
     }
-    const mouse_on=()=>{
+    const mouse_on = () => {
       $('cursor').find('.cursor-glow canvas').removeClass('opacity-0');
       $('cursor').find('.cursor-glow canvas').addClass('opacity-1');
     }
-    const glow =()=>{
+    const glow = () => {
       const canvas = document.getElementById("myCanvas");
       const ctx = canvas.getContext("2d");
       // Create a radial gradient
@@ -86,17 +90,17 @@ const app = {
       const gradient = ctx.createRadialGradient(800, 800, 0, 800, 800, 400);
       // console.log(gradient);
       // Add color stops
-      gradient.addColorStop(0,"rgba(21,137,255, .11)");
-      gradient.addColorStop(0.1,"rgba(21,137,255, .10)");
-      gradient.addColorStop(0.2,"rgba(21,137,255, .09)");
-      gradient.addColorStop(0.3,"rgba(21,137,255, .08)");
-      gradient.addColorStop(0.4,"rgba(21,137,255, .07)");
-      gradient.addColorStop(0.5,"rgba(21,137,255, .06)");
-      gradient.addColorStop(0.6,"rgba(21,137,255, .05)");
-      gradient.addColorStop(0.7,"rgba(21,137,255, .04)");
-      gradient.addColorStop(0.8,"rgba(21,137,255, .03)");
-      gradient.addColorStop(0.9,"rgba(21,137,255, .02)");
-      gradient.addColorStop(1,"transparent");
+      gradient.addColorStop(0, "rgba(21,137,255, .11)");
+      gradient.addColorStop(0.1, "rgba(21,137,255, .10)");
+      gradient.addColorStop(0.2, "rgba(21,137,255, .09)");
+      gradient.addColorStop(0.3, "rgba(21,137,255, .08)");
+      gradient.addColorStop(0.4, "rgba(21,137,255, .07)");
+      gradient.addColorStop(0.5, "rgba(21,137,255, .06)");
+      gradient.addColorStop(0.6, "rgba(21,137,255, .05)");
+      gradient.addColorStop(0.7, "rgba(21,137,255, .04)");
+      gradient.addColorStop(0.8, "rgba(21,137,255, .03)");
+      gradient.addColorStop(0.9, "rgba(21,137,255, .02)");
+      gradient.addColorStop(1, "transparent");
       // Set the fill style and draw a rectangle
       ctx.fillStyle = gradient;
       // fillRect(x,y,z,k)
@@ -106,29 +110,29 @@ const app = {
     }
     // start glow
     glow();
-    if(window.innerWidth > 1149){
+    if (window.innerWidth > 1149) {
       document.addEventListener("mousemove", (e) => {
         mouse_on();
         clearTimeout(timer);
-        timer=setTimeout(mouse_stop,300);
+        timer = setTimeout(mouse_stop, 300);
         let x = e.clientX;
         let y = e.clientY;
-  
-        $('.cursor-glow canvas').css({'top':y,'left':x})
+
+        $('.cursor-glow canvas').css({ 'top': y, 'left': x })
       });
     }
- 
+
   },
   filter: () => {
-      let $grid = $("#isotope").isotope({
-        itemSelector: ".isotope-item",
-        layoutMode: "fitRows",
-        filter: "*",
-      });
-      $("[filter-tabs]").on("click", "button", function () {
-        let filterValue = $(this).attr("data-filter");
-        $grid.isotope({ filter: filterValue });
-      });
+    let $grid = $("#isotope").isotope({
+      itemSelector: ".isotope-item",
+      layoutMode: "fitRows",
+      filter: "*",
+    });
+    $("[filter-tabs]").on("click", "button", function () {
+      let filterValue = $(this).attr("data-filter");
+      $grid.isotope({ filter: filterValue });
+    });
 
   },
   tabs: () => {
@@ -142,195 +146,89 @@ const app = {
     })
   },
   empower_masonry: () => {
-   
-      $(".empower_grid").isotope({
-        layoutMode: "packery",
-        itemSelector: ".col",
-      });
-      $(".grid2").isotope({
-        layoutMode: "packery",
-        itemSelector: ".col",
-      });
 
-  },
-  splider: () => {
-    const splides = [
-      {
-        id: ".splide2",
-        options: {
-          easing: "linear",
-          type: "loop",
-          pauseOnHover: false,
-          autoplay: true,
-          autoWidth: true,
-          arrows: false,
-          interval: 0,
-          speed: 25000,
-          pagination: false,
-          gap: "45px",
-          breakpoints: {
-            768: {
-              gap: "25px"
-            }
-          }
-        }
-      },
-      {
-        id: ".splide3",
-        options: {
-          easing: "linear",
-          type: "loop",
-          pauseOnHover: true,
-          autoplay: true,
-          autoWidth: true,
-          arrows: false,
-          interval: 0,
-          speed: 7000,
-          pagination: false,
-          gap: "34px",
-          breakpoints: {
-            1024: {
-              perPage: 2,
-              gap: "15px",
-              autoWidth: false
-            }
-          }
-        }
-      }
-    ]
-      splides.map(item => {
-        // console.log(item.options);
-        new Splide(`${item.id}`, item.options).mount();
-      })
-      new Splide('.grid_layout_slider', {
-        easing: "linear",
-        type: "loop",
-        pauseOnHover: true,
-        autoplay: true,
-        autoWidth: true,
-        arrows: false,
-        interval: 0,
-        speed: 3000,
-        pagination: false,
-        gap: "15px",
-        breakpoints: {
-          1366: {
-            perPage: 3,
-            autoWidth: false,
-          },
-          1024: {
-            perPage: 3,
-            autoWidth: false,
-          },
-          768: {
-            perPage: 3,
-            autoWidth: false,
-            gap: '5px'
-          },
-          525: {
-            perPage: 2,
-            autoWidth: false,
-          }
-        }
-      }).mount();
+    $(".empower_grid").isotope({
+      layoutMode: "packery",
+      itemSelector: ".col",
+    });
+    $(".grid2").isotope({
+      layoutMode: "packery",
+      itemSelector: ".col",
+    });
+
   },
   tabs_shop: () => {
-    
-      new Splide('#tabs_shop_splide-1', {
-        type: 'loop',
-        perPage: 3,
-        autoplay: true,
-        interval: 4000,
-        flickMaxPages: 1,
-        updateOnMove: true,
-        pagination: false,
-        arrows: false,
-        padding: '10%',
-        gap: '30px',
-        // throttle: 300,
-        breakpoints: {
-          2000: {
-            perPage: 2,
-            padding: '19%'
-          },
-          1440: {
-            perPage: 2,
-            padding: '10%'
-          },
-          1024: {
-            gap: '15px',
-            perPage: 2,
-            padding: '5%'
-          },
-          768: {
-            padding: '1%',
-            perPage: 2,
-            gap: '15px',
-          },
-          525: {
-            perPage: 1,
-            gap: '15px',
-
-          }
+    const tab_sl1 = new Swiper('#tabs_shop_splide-1', {
+      slidesPerView: 1,
+      spaceBetween: 15,
+      loop: false,
+      grabCursor: true,
+      navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+      },
+      breakpoints: {
+        525: {
+          slidesPerView: 2,
+          spaceBetween: 15,
+        },
+        768: {
+          slidesPerView: 2,
+          spaceBetween: 15,
+        },
+        1025: {
+          slidesPerView: 3,
+          spaceBetween: 15,
+        },
+        1366: {
+          slidesPerView: 3,
+          spaceBetween: 30,
         }
-      }).mount();
-      new Splide('#tabs_shop_splide-2', {
-        type: 'loop',
-        perPage: 3,
-        autoplay: true,
-        interval: 4000,
-        flickMaxPages: 1,
-        updateOnMove: true,
-        pagination: false,
-        arrows: false,
-        padding: '10%',
-        gap: '30px',
-        // throttle: 300,
-        breakpoints: {
-          2000: {
-            perPage: 2,
-            padding: '19%'
-          },
-          1440: {
-            perPage: 2,
-            padding: '10%'
-          },
-          1024: {
-            gap: '15px',
-            perPage: 2,
-            padding: '5%'
-          },
-          768: {
-            padding: '1%',
-            perPage: 2,
-            gap: '15px',
-          },
-          525: {
-            perPage: 1,
-            gap: '15px',
-
-          }
+      }
+    })
+    const tab_sl2 = new Swiper('#tabs_shop_splide-2', {
+      slidesPerView: 1,
+      spaceBetween: 15,
+      loop: false,
+      grabCursor: true,
+      navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+      },
+      breakpoints: {
+        525: {
+          slidesPerView: 2,
+          spaceBetween: 15,
+        },
+        768: {
+          slidesPerView: 2,
+          spaceBetween: 15,
+        },
+        1025: {
+          slidesPerView: 2,
+          spaceBetween: 15,
+        },
+        1366: {
+          slidesPerView: 3,
+          spaceBetween: 30,
         }
-      }).mount();
-
-    
-
-      $('#tabs_demo').on('click', 'button', function () {
-        $('#tabs_demo').find('button.is-active').removeClass('is-active');
-        $(this).addClass('is-active');
-        $('.tabs_demo').find('.tabs_shop_splide.control-active').removeClass('control-active');
-        let id = $(this).attr('aria-controls');
-        // console.log(id);
-        $(`#${id}`).addClass('control-active')
-      })
-
+      }
+    })
+    $('#tabs_demo').on('click', 'button', function () {
+      $('#tabs_demo').find('button.is-active').removeClass('is-active');
+      $(this).addClass('is-active');
+      $('.tabs_demo').find('.tabs_shop_splide.control-active').removeClass('control-active');
+      let id = $(this).attr('aria-controls');
+      // console.log(id);
+      $(`#${id}`).addClass('control-active')
+    })
   },
   table: () => {
-   
 
-      $('#table_viewmore').on('click', function () {
-        $('#total_wrap').addClass('view-more-active')
-      })
+
+    $('#table_viewmore').on('click', function () {
+      $('#total_wrap').addClass('view-more-active')
+    })
 
 
   },
@@ -358,6 +256,7 @@ const app = {
     createStars();
   },
   text_circle: () => {
+
     const str = "highconverting";
     const text = $('#text-circle');
     // console.log(text);
@@ -365,8 +264,8 @@ const app = {
       text.append(`<span style="transform:rotate(${26 * i}deg)">${str[i]}</span>`);
     }
 
-
-    const str2 = "one-time payment";
+    // return;
+    const str2 = "one-time paiment";
     const text2 = $('#payment_circle');
     // console.log(text);
     for (let i = 0; i < str2.length; i++) {
@@ -383,9 +282,9 @@ const app = {
         btn.removeClass('show');
       }
     });
-      btn.on('click', function () {
-        $('html, body').animate({ scrollTop: 0 }, '0');
-      });
+    btn.on('click', function () {
+      $('html, body').animate({ scrollTop: 0 }, '0');
+    });
   },
   video_popup: (config) => {
 
@@ -405,31 +304,31 @@ const app = {
 
         });
       } else {
-        if(config.video.disable_mobile){
+        if (config.video.disable_mobile) {
           console.log("Disable video on mobile");
           $('#section_video').addClass('disable_mobile');
           return;
         }
       }
     }
-   
-      $('.popup_youtube').magnificPopup({
-        // disableOn: 768,
-        type: 'iframe',
-        mainClass: 'mfp-fade',
-        removalDelay: 160,
-        preloader: false,
-        fixedContentPos: false,
-        // callbacks: {
-        //   open: function () {
-        //     $('.video-item').find('video').trigger('pause');
-        //   },
-        //   close: function () {
-        //     $('.video-item.is-hover').find('video').trigger('play');
-        //   }
-        // },
-      });
-      video(config);
+
+    $('.popup_youtube').magnificPopup({
+      // disableOn: 768,
+      type: 'iframe',
+      mainClass: 'mfp-fade',
+      removalDelay: 160,
+      preloader: false,
+      fixedContentPos: false,
+      // callbacks: {
+      //   open: function () {
+      //     $('.video-item').find('video').trigger('pause');
+      //   },
+      //   close: function () {
+      //     $('.video-item.is-hover').find('video').trigger('play');
+      //   }
+      // },
+    });
+    video(config);
   },
   counter_number: () => {
     // cau truc
@@ -439,7 +338,7 @@ const app = {
     // </counter>
     // 
     $(window).scroll(function () {
-      $('counter').each(function(){
+      $('counter').each(function () {
         var oTop = $(this).offset().top - window.innerHeight;
         // console.log("Check number counter: ",$(window).scrollTop() > oTop);
         if ($(window).scrollTop() > oTop) {
@@ -462,7 +361,7 @@ const app = {
                   $this.text(this.countNum);
                   //alert('finished');
                 }
-  
+
               });
           });
         }
@@ -470,10 +369,10 @@ const app = {
     });
   },
   swatch_color: () => {
-      $('.swatch_color').on('click', 'button', function () {
-        $(this).parents().find('button.is-selected').removeClass('is-selected');
-        $(this).addClass('is-selected');
-      })
+    $('.swatch_color').on('click', 'button', function () {
+      $(this).parents().find('button.is-selected').removeClass('is-selected');
+      $(this).addClass('is-selected');
+    })
   },
   reveal: (config) => {
     // structor
@@ -482,9 +381,9 @@ const app = {
     //    code html
     //  </div>
     // </div> 
-    
+
     const reveal = (config) => {
-      if(!config.reveal.enable){
+      if (!config.reveal.enable) {
         return
       }
       let reveals = document.querySelectorAll('[reveal]');
@@ -494,7 +393,7 @@ const app = {
         console.log("Reveal is not working because not find the item ");
         return;
       }
-      if(window.innerWidth > 768){
+      if (window.innerWidth > 768) {
         $(window).on('scroll', function () {
           reveals.forEach((el) => {
             const windowHeight = window.innerHeight;
@@ -505,7 +404,7 @@ const app = {
             const posPoint = 20;
             // attr parent
             el.parentElement.style.perspective = '700px';
-            el.parentElement.style.transformStyle= 'preserve-3d';
+            el.parentElement.style.transformStyle = 'preserve-3d';
             el.parentElement.style.perspectiveOrigin = '100% 0%';
             // attr node
             el.style.transformOrigin = '50% 0';
@@ -514,23 +413,23 @@ const app = {
             el.style.scale = 'none';
             el.style.transition = 'all .35s ease';
             // console.log(revealTop > windowHeight - revealPoint);
-            if(revealTop > windowHeight - revealPoint){
+            if (revealTop > windowHeight - revealPoint) {
               el.style.opacity = '0';
               el.style.transform = `rotateX(-${posPoint}deg)`
             }
             if (revealTop < windowHeight - revealPoint) {
-              if(revealTop > -50){
+              if (revealTop > -50) {
                 let schemas = Math.abs(1 - revealTop / elHeight);
                 let opacity = Math.min((Math.abs(1 - (revealTop - 350) / elHeight)), 1);
-                let rotate =  Math.min((posPoint * schemas - (posPoint - 10)),0)
+                let rotate = Math.min((posPoint * schemas - (posPoint - 10)), 0)
                 el.style.opacity = `${opacity}`;
                 el.style.transform = `translate3d(0px,0px,0px) rotateX(${rotate}deg)`
               }
-              else{
+              else {
                 el.style.transform = `translate(0,0)`
               }
             }
-            
+
           })
         })
       }
@@ -538,8 +437,8 @@ const app = {
     reveal(config)
 
   },
-  popup:()=>{
-    $('[name="grid_popup"]').on('click',function(e){
+  popup: () => {
+    $('[name="grid_popup"]').on('click', function (e) {
 
       e.preventDefault();
 
@@ -555,18 +454,18 @@ const app = {
       popup_html.find('.title').text(p_obj.title);
       popup_html.find('.des').html(p_obj.des);
       popup_html.find('.button_wrap').html(p_obj.button);
-      popup_html.find('.img_wrap .img').html(p_obj.data_img)      
+      popup_html.find('.img_wrap .img').html(p_obj.data_img)
       openPopup();
     })
-    const openPopup=()=>{
-      $('popup').css('display','block');
+    const openPopup = () => {
+      $('popup').css('display', 'block');
     }
-    const closePopup=()=>{
-      $('popup').css('display','none');
+    const closePopup = () => {
+      $('popup').css('display', 'none');
       $('popup .content_inner').html(popup_original);
     }
     //  close popup 
-    $('popup .popup-close,popup .overlay').on('click',function(){
+    $('popup .popup-close,popup .overlay').on('click', function () {
       closePopup();
     })
     const popup_original = `<div class="wrap">
@@ -577,45 +476,75 @@ const app = {
     </div>  
     <div class="img_wrap">
     <div class="img hdt-ratio" style="--aspect-ratioapt: 928/503;">
+      <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" />
     </div>
     </div>                  
     </div>`
   },
-  logo_cta:()=>{
-    $('.logo_cta').on('click',function(e){
+  logo_cta: () => {
+    $('.logo_cta').on('click', function (e) {
       e.preventDefault();
       $('html, body').animate({ scrollTop: 0 }, '0');
       console.log("done");
     })
   },
-  scrollspy:()=>{
+  scrollspy: () => {
     let sectionIds = $('a.scrollspy_s');
     console.log("SCrollspy is active");
-    $(document).scroll(function(){
-        sectionIds.each(function(){
-            let container = $(this).attr('href');
-            let containerOffset = $(container).offset().top;
-            let containerHeight = $(container).outerHeight();
-            let containerBottom = containerOffset + containerHeight;
-            let scrollPosition = $(document).scrollTop();
-    
-            if(scrollPosition < containerBottom - 20 && scrollPosition >= containerOffset - 20){
-                $(this).addClass('active');
-            } else{
-                $(this).removeClass('active');
-            }
-    
-    
-        });
+    $(document).scroll(function () {
+      sectionIds.each(function () {
+        let container = $(this).attr('href');
+        let containerOffset = $(container).offset().top;
+        let containerHeight = $(container).outerHeight();
+        let containerBottom = containerOffset + containerHeight;
+        let scrollPosition = $(document).scrollTop();
+
+        if (scrollPosition < containerBottom - 20 && scrollPosition >= containerOffset - 20) {
+          $(this).addClass('active');
+        } else {
+          $(this).removeClass('active');
+        }
+
+
+      });
     });
   }
   ,
+  table:()=>{
+    if(window.innerWidth < 767){
+      return;
+    }
+    $('table tbody tr:not(.total)').slice(16).hide();
+    $(document).on('click','.tb_viewmore',function(){
+      $('table tbody tr:not(.total)').slideDown();
+      $('.hdt-table .ww').addClass('view');
+
+    })
+  },
+  demo_open:()=>{
+    $(document).on('click','[demo_open]',function(e){
+      if($('.pass_pop').attr('clicked') == 'clicked'){
+        return;
+      }
+      e.preventDefault();
+      $('.pass_pop').addClass('open');
+      $('.pass_pop .view_more').attr('href',`${$(this).attr('href')}`)
+    })
+  },
+  password_popup:()=>{
+    $(document).on('click','.pass_pop .overlay,.pass_pop .close',function(){
+      $('.pass_pop').removeClass('open')
+    });
+    $(document).on('click','.pass_pop .view_more',function(){
+      $('.pass_pop').attr('clicked',"clicked")
+    })
+  },
   start: () => {
-    const config={
-      video:{
+    const config = {
+      video: {
         disable_mobile: true
       },
-      reveal:{
+      reveal: {
         enable: true
       }
     }
@@ -626,7 +555,6 @@ const app = {
     app.tabs();
     app.filter();
     app.empower_masonry();
-    app.splider();
     // app.table();
     app.galaxy();
     app.text_circle();
@@ -640,10 +568,54 @@ const app = {
     app.logo_cta();
     app.cursor();
     app.scrollspy();
-
+    app.table();
+    app.demo_open();
+    app.password_popup()
     new WOW().init();
   },
 };
 
 app.start();
 
+class topBar extends HTMLElement{
+  constructor(){
+    super();
+    if(window.innerWidth <767){
+      return;
+    }
+    if(JSON.parse(localStorage.getItem('topbar'))?.active == false){
+      this.style.display='none';
+      return;
+    }
+    this.slider = this.querySelector('.slider');
+    this.btn_close = this.querySelector('button.close');
+    this.initSlider();
+    this.close()
+  }
+  initSlider(){
+    
+    let self = this;
+    if(!self.slider){
+      return;
+    }
+    return new Swiper(self.slider, {
+      slidesPerView: 1,
+      autoplay: {
+        delay: 5000,
+        disableOnInteraction: false,
+      },
+      grabCursor:true
+    })
+  }
+  close(){
+    let self = this;
+    if(!self.btn_close){
+      return;
+    }
+    self.btn_close.addEventListener('click',function(){
+      self.style.height = 0;
+      localStorage.setItem('topbar','{"active":false}')
+    })
+  }
+}
+customElements.define('topbar-custom',topBar)
