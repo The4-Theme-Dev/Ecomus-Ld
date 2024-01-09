@@ -667,6 +667,7 @@ inset: -1px;
   justify-content: center;
   transition: 0.35s ease-in-out;
   z-index: 2;
+  pointer-events: none;
 }
 
 .demos .preview_btn {
@@ -691,8 +692,8 @@ inset: -1px;
       #ff9c8d 2.41%,
       #d655a5 48.93%,
       #6053cb 94.5%);
+      pointer-events: auto;
 }
-
 
 .empower .col-left {
   display: flex;
@@ -2164,8 +2165,10 @@ popup counter{
 }
 
 .splide-2 {
-  pointer-events: none;
   overflow-x: hidden;
+}
+.splide-2 .marquee{
+  pointer-events: none;
 }
 
 .splide-2+.line {
@@ -2278,8 +2281,10 @@ popup counter{
 }
 
 .b_ecomus .splide3 {
-  /* pointer-events: none; */
   position: relative;
+}
+.b_ecomus .splide3  .marquee{
+  pointer-events: none;
 }
 
 .b_ecomus .splide3::before {
@@ -4100,6 +4105,21 @@ popup counter{
 }
 
 @media (max-width: 650px) {
+  .demos .preview_btn{
+    margin-bottom: 5px;
+  }
+  .tabs_demo .tabs_inner{
+    padding: 0 5px; 
+  }
+  .tabs_shop .info a{
+    font-size: 14px;
+  }
+  .tabs_demo .tabs_inner .col-inner{
+    padding: 10px;
+  }
+  .tabs_demo .tabs_inner .container-fluid{
+    padding: 0;
+  }
   .galaxy_eff{
     transform: none;
   }
