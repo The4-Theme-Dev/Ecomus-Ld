@@ -171,11 +171,6 @@ header {
   overflow: hidden;
 }
 
-.banner .banner_svg_bg img {
-  position: unset;
-}
-
-
 .banner .button-label {
   font-size: 16px;
   font-weight: 600;
@@ -1395,26 +1390,6 @@ popup counter {
   display: none;
 }
 
-.empower_grid .item2 .title {
-  color: #fff;
-  font-size: 36px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: normal;
-  margin-bottom: 16px;
-  top: 36px;
-  left: 32px;
-}
-
-.empower_grid .item2 .des {
-  color: #fff;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 24px;
-  /* 150% */
-  margin-bottom: 27px;
-}
 
 .empower_grid .item8 .col-wrap {
   background: -o-linear-gradient(312deg,
@@ -2723,7 +2698,7 @@ popup counter {
 }
 
 .b_ecomus .b_e .inner {
-  border-radius: 20px 20px 200px 200px;
+  border-radius: 20px 20px 105px 105px;
   border: 1px solid rgba(255, 255, 255, 0.12);
   background: -o-radial-gradient(-5.51% -4.72%, 117.63% 154.08%, rgba(0, 0, 0, 0.49) 0%, rgba(0, 0, 0, 0.00) 100%);
   background: radial-gradient(117.63% 154.08% at -5.51% -4.72%, rgba(0, 0, 0, 0.49) 0%, rgba(0, 0, 0, 0.00) 100%);
@@ -2733,7 +2708,7 @@ popup counter {
   max-width: 90%;
   margin: 0 auto;
   text-align: center;
-  padding: 82px 55px 82px;
+  padding: 82px 55px 55px;
   pointer-events: auto;
 }
 
@@ -3634,9 +3609,9 @@ transition: bottom .25s ease-in;
 
 @media (min-width: 769px) {
   .my_vid .video_wrap .video-item.is-hover {
-    -webkit-box-flex: 3;
-    -ms-flex: 3;
-    flex: 3;
+    -webkit-box-flex: 9;
+    -ms-flex: 9;
+    flex: 9;
   }
 
   .banner .banner_demo {
@@ -3783,7 +3758,7 @@ transition: bottom .25s ease-in;
 
 }
 
-@media (min-width: 1366px) and (max-width: 1440px) {
+@media (min-width: 1366px) and (max-width: 1480px) {
   .wrap_partner .p_i{
     max-width: 370px;
   }
@@ -3807,7 +3782,7 @@ transition: bottom .25s ease-in;
 
 }
 
-@media(min-width: 1200px) and (max-width: 1440px) {
+@media(min-width: 1200px) and (max-width: 1480px) {
 
   .empower_grid .col-wrap.item-fix {
     height: 700px;
@@ -3834,7 +3809,7 @@ transition: bottom .25s ease-in;
   }
 
   .banner .banner_svg_bg {
-    max-width: 500px;
+    width: 500px;
   }
 
   .banner .banner_demo-1 {
@@ -3846,9 +3821,6 @@ transition: bottom .25s ease-in;
   }
 
 
-  .demos .section-inner {
-    padding-top: 50px;
-  }
 
   .empower .tophead {
     margin-bottom: 115px;
@@ -3856,7 +3828,11 @@ transition: bottom .25s ease-in;
 }
 
 @media (min-width: 1700px) {
-
+  .my_vid .video_wrap .video-item.is-hover {
+    -webkit-box-flex: 3;
+    -ms-flex: 3;
+    flex: 3;
+  }
   .shopify_app .col-left {
     padding-top: 98px;
   }
@@ -3983,8 +3959,15 @@ transition: bottom .25s ease-in;
 }
 
 @media (max-width: 1500px) {
+
+  .demos .section-inner {
+    padding-top: 50px;
+  }
   .solution .content {
     text-align: center;
+  }
+  .features .col_wrap{
+    padding: 40px;
   }
 
 
@@ -4051,7 +4034,7 @@ transition: bottom .25s ease-in;
   .hdt-table tbody {
     padding: 20px 0;
     font-size: 14px;
-    line-height: 24px;
+    line-height: 30px;
   }
 
   .hdt-table thead tr th {
@@ -4149,6 +4132,9 @@ transition: bottom .25s ease-in;
 }
 
 @media (max-width: 1024px) {
+  .banner .banner_demo-img-wrap::before,.banner .banner_demo-img-wrap::after{
+    display: none;
+  }
   .wrap_partner .p_ctn{
     gap: 20px;
   }
@@ -4602,7 +4588,11 @@ transition: bottom .25s ease-in;
     height: 450px;
   }
 }
-
+@media (min-width: 768px){
+  .b_ecomus .section-inner{
+    padding-bottom: 700px !important;
+  }
+}
 @media (min-width: 768px) and (max-width: 991px) {
 
 
@@ -5431,7 +5421,9 @@ transition: bottom .25s ease-in;
 }
 
 @media (max-width: 425px) {
-
+  :where(.empower_grid .banner_wrap, popup .banner_wrap) .item:nth-child(3){
+    padding-left: 10px;
+  }
   :where(.empower_grid .banner_wrap, popup .banner_wrap) .count {
     font-size: 35px;
   }
@@ -5573,8 +5565,8 @@ transition: bottom .25s ease-in;
 
   .my_vid .video_wrap .video-item {
     -webkit-box-flex: 1;
-    -ms-flex: 1 0 300px;
-    flex: 1 0 300px;
+    -ms-flex: 1 0 325px;
+    flex: 1 0 325px;
   }
 }
 
@@ -5582,7 +5574,19 @@ transition: bottom .25s ease-in;
   .b_ecomus .title {
     font-size: 12px;
   }
-
+  .video-item .btn-popup span{
+    display: none;
+   
+  }
+  .video-item .btn-popup{
+    width: 40px;height: 40px;
+    padding: 0;
+   
+  }
+  .video-item .popup{
+    top: 50%;left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+  }
   .hdt-table .hdt-des {
     font-size: 10px;
   }
