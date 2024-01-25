@@ -583,12 +583,12 @@ const app = {
         return;
       }
       e.preventDefault();
-      if($(this).attr('href') != '#comingsoon'){
+      if ($(this).attr('href') != '#comingsoon') {
         let url_link = $(this).attr('href');
         $('.pass_pop').addClass('open');
         $('.pass_pop .view_more').attr('href', `${url_link}`);
-      }else{
-        window.open('https://1.envato.market/Y9mvDR','_blank')
+      } else {
+        window.open('https://1.envato.market/Y9mvDR', '_blank')
       }
     })
   },
@@ -694,7 +694,7 @@ class partner extends HTMLElement {
   }
   clickAction() {
     let self = this;
-    self.addEventListener('click',function(){
+    self.addEventListener('click', function () {
       self.classList.add('is-active');
       self.popup.classList.add('open');
       let data = {
@@ -703,22 +703,60 @@ class partner extends HTMLElement {
       }
       self.openModal(data)
     })
-    if(self.popup){
-      self.overlay.addEventListener('click',function(){
+    if (self.popup) {
+      self.overlay.addEventListener('click', function () {
         self.popup.classList.remove('open');
         self.classList.remove('is-active')
       })
-      self.close.addEventListener('click',function(){
+      self.close.addEventListener('click', function () {
         self.popup.classList.remove('open');
         self.classList.remove('is-active')
       })
     }
   }
-  openModal(data){
-    let self= this;
-    self.popup.querySelector('img').setAttribute('src',data.img);
+  openModal(data) {
+    let self = this;
+    self.popup.querySelector('img').setAttribute('src', data.img);
     self.popup.querySelector('.p_content').innerHTML = data.content;
   }
-  
+
 }
-customElements.define('part-ner', partner)
+customElements.define('part-ner', partner);
+
+// loading page
+class loadingPage extends HTMLElement {
+  constructor() {
+    super();
+    this.loading = this.querySelector('#loading');
+    this.load_center = this.querySelector('#loading-center');
+    this.load_wrap = this.querySelector('#loader-wrap');
+
+
+    let fn = this.pageOnLoad.bind(this);
+    document.addEventListener(
+      "DOMContentLoaded", fn,
+      false
+    );
+  }
+  pageOnLoad() {
+    let self = this;
+    setTimeout(function () {
+      self.loading.className = "slideDown";
+    }, 100);
+    setTimeout(function () {
+      self.load_center.className = "zoomOut";
+    }, 100);
+    setTimeout(function () {
+      document.querySelector('html').style.overflow = 'auto';
+      self.load_wrap.classList.add('dom_loaded');
+    }, 100);
+  }
+}
+customElements.define('loading-page', loadingPage)
+
+
+
+
+
+
+
