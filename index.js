@@ -278,6 +278,7 @@ const app = {
       // console.log(id);
       $(`#${id}`).addClass('control-active')
     })
+
   },
   table: () => {
 
@@ -633,6 +634,57 @@ const app = {
     app.demo_open();
     app.password_popup()
     new WOW().init();
+    // new js
+    const tab_sl5 = new Swiper('.ecom_slider', {
+      slidesPerView: 1,
+      spaceBetween: 15,
+      loop: true,
+      grabCursor: true,
+      // slidesPerGroup: 4,
+      initialSlide: 9,
+      // loopAdditionalSlides: 1,
+
+      // pagination: {
+      //   el: ".swiper-pagination",
+      //   bulletElement: 'button',
+      //   clickable: true,
+      // },
+      navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+      },
+      autoplay: {
+        delay: 5000,
+        pauseOnMouseEnter:true,
+      },
+      breakpoints: {
+        525: {
+          slidesPerView: 2,
+          spaceBetween: 15,
+        },
+        768: {
+          slidesPerView: 2,
+          spaceBetween: 15,
+        },
+        1025: {
+          slidesPerView: 3,
+          spaceBetween: 15,
+        },
+        1366: {
+          slidesPerView: 4,
+          spaceBetween: 30,
+        },
+        1680: {
+          slidesPerView: 4,
+          spaceBetween: 30,
+        },
+        2000: {
+          centeredSlides: true,
+          slidesPerView: 6,
+          spaceBetween: 30,
+        }
+      }
+    })
   },
 };
 
