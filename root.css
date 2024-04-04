@@ -3233,6 +3233,9 @@ multi-brand-video .close:hover {
     padding: 15px;
     font-size: 12px;
   }
+  .kxti .close{
+    right: unset;left: 0;
+  }
 }
 @media (max-width: 375px){
   .kxti .text-wrap{

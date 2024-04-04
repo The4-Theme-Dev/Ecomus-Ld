@@ -6200,3 +6200,18 @@ popup counter {
     padding-bottom: 30px;
   }
 }
+
+/* gtmetrix */
+.gtmetrix img{
+  width: fit-content;
+}
+.gtmetrix{
+  position: absolute;
+  top: 0;
+  left: 27px;
+  right: 0;
+  transform: translateY(-50%);
+  z-index: 2;
+  height: 35px;
+  pointer-events: none;
+}
