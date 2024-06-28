@@ -2237,8 +2237,21 @@ popup counter {
   -o-transition: opacity .25s ease-in, visibility .25s ease-in;
   transition: opacity .25s ease-in, visibility .25s ease-in;
 }
-
-
+.hdt-table .tb_label{
+  position: absolute;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px 5px;
+  font-size: 10px;
+  right: 0;
+  bottom: 0;
+  color: #fff;
+  background-color: rgba(131, 183, 53,1);
+  transform: translate(100%,-70%);
+  border-radius: 3px;
+  line-height: 19px;
+}
 .hdt-table .tb_viewmore {
   border-radius: 100px;
   border: 1px solid rgba(255, 255, 255, 0.20);
