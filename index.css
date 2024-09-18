@@ -832,7 +832,9 @@ header {
   -ms-flex-align: center;
   align-items: center;
 }
-
+.demos .comingsoon .preview_wrap{
+  display: none;
+}
 .demos .preview_wrap {
   position: absolute;
   inset: -2px;
@@ -900,11 +902,14 @@ header {
       #6053cb 94.5%);
   pointer-events: auto;
 }
-
+.demos .comingsoon .comingsoon_preview{
+  display: block;
+}
 .demos .comingsoon_preview {
   position: absolute;
   inset: 0;
   z-index: 1;
+  display: none;
 }
 
 .demos .comingsoon_preview .view {
@@ -925,13 +930,17 @@ header {
   transition: opacity .1s ease-in-out, visibility .1s ease-in-out;
   pointer-events: none;
 }
-
+.demos .cms_label{
+  display: none;
+}
+.demos .comingsoon .cms_label{
+  display: inline-flex;
+}
 .demos :where(.comingsoon_preview) .cms_label {
   border-radius: 100px;
   border: 0.5px solid rgba(255, 255, 255, 0.20);
   background: rgba(0, 0, 0, 0.50);
   backdrop-filter: blur(10px);
-  display: inline-flex;
   padding: 10px 20px;
   justify-content: center;
   align-items: center;
