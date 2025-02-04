@@ -6248,6 +6248,8 @@ popup counter {
 /* mobile */
 @media (max-width: 767px) {
 
+  .hdt-table .tb_label{
+  }
   .b_ecomus .bg_blur {
     display: none;
   }
