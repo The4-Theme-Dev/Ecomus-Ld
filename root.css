@@ -3325,3 +3325,11 @@ multi-brand-video .close:hover {
     padding: 10px;
   }
 }
+
+/* EFFECT */
+body:not(.noel) .noel_image{
+  display: none;
+}
+body:not(.noel) snow-ball{
+  display: none !important;
+}
