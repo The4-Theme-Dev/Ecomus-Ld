@@ -1107,3 +1107,4 @@ class bannerPopup extends HTMLElement{
 
 }
 customElements.define('clx-banner-popup',bannerPopup);
+

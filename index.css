@@ -6442,3 +6442,119 @@ clx-banner-popup{
 clx-banner-popup > *{
   pointer-events: auto;
 }
+
+
+/* Feedback facebook */
+.feedback .layout_wrap{
+  padding: 127px 132px 67px 116px;
+}
+.feedback .clx-grid{
+ display: flex;
+ flex-wrap: wrap;
+ justify-content: space-between;
+}
+
+.feedback .clx-grid .clx-img {
+  flex: 0 0 auto;
+}
+.feedback .clx-grid .clx-content{
+  flex: 0 0 54%;
+}
+.feedback .clx-img .clx-heading{
+  font-size: 80px;
+  font-weight: 700;
+  margin-bottom: 24px;
+  line-height: 1;
+  padding-inline-start: 23px;
+}
+.feedback .clx-heading > p{
+  position: relative;
+}
+.feedback .quote svg{
+  position: relative;
+  bottom: 50px;
+}
+.feedback .quote{
+  height: 0;
+}
+.feedback .clx-facebook{
+  width: fit-content;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 8px 28px 8px 8px;
+  border-radius: 100px;
+  background-color: rgba(37, 37, 43, 1);
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 14px;
+}
+.feedback .clx-list-feedback > *{
+  margin-top: 34px;
+}
+@media (max-width: 1550px){
+  .feedback .clx-grid .clx-img {
+    flex: 0 0 40%;
+  }
+  .feedback .clx-grid .clx-content{
+    flex: 0 0 54%;
+  }
+  .feedback .layout_wrap{
+    padding: 80px 30px;
+  }
+  .feedback .clx-img .clx-heading{
+    font-size: 68px;
+    line-height: 1.2;
+    padding-inline-start: 0px;
+  }
+  .feedback .quote svg{
+    bottom: 30px;
+    width: 40px;
+    height: auto;
+  }
+  .feedback .clx-facebook{
+    font-size: 18px;
+  }
+  .feedback .clx-list-feedback > *{
+    margin-top: 24px;
+  }
+}
+@media (max-width: 1024px){
+  .feedback .clx-grid .clx-img {
+    flex: 0 0 36%;
+  }
+  .feedback .clx-grid .clx-content{
+    flex: 0 0 58%;
+  }
+  .feedback .layout_wrap{
+    padding: 80px 30px;
+  }
+  .feedback .clx-img .clx-heading{
+    font-size: 36px;
+  }
+  .feedback .quote svg{
+    bottom: 20px;
+    width: 30px;
+    height: auto;
+  }
+  .feedback .clx-facebook{
+    font-size: 16px;
+    padding-right: 20px;
+  }
+}
+@media (max-width: 750px){
+  .feedback .clx-grid .clx-img {
+    flex: 0 0 100%;
+  }
+  .feedback .clx-grid .clx-content{
+    flex: 0 0 100%;
+  }
+  .feedback .layout_wrap{
+    padding: 40px 15px;
+  }
+  .feedback .clx-img .clx-heading{
+    margin-bottom: 0;
+    font-size: 30px;
+  }
+}
