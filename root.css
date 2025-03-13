@@ -768,7 +768,7 @@ picture {
   padding-bottom: var(--ratio-percent);
 }
 
-.hdt-ratio :where(img, picture, video) {
+.hdt-ratio:not(.no-resize) :where(img, picture, video) {
   position: absolute;
   inset: 0;
   display: block;

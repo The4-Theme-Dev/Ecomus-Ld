@@ -507,11 +507,15 @@ const app = {
         data_img: parent.find('.img').clone(),
         button: parent.find('.group-btn').clone(),
       }
-      console.log(p_obj);
+      // console.log(p_obj);
       popup_html.find('.title').text(p_obj.title);
       popup_html.find('.des').html(p_obj.des);
       popup_html.find('.button_wrap').html(p_obj.button);
-      popup_html.find('.img_wrap .img').html(p_obj.data_img)
+      if(parent.find('.no-resize')){
+        popup_html.find('.img_wrap').html(p_obj.data_img)
+      }else{
+        popup_html.find('.img_wrap .img').html(p_obj.data_img)
+      }
       openPopup();
     })
     const openPopup = () => {
