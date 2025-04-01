@@ -1001,7 +1001,7 @@ class bannerPopup extends HTMLElement{
   constructor(){
     super();
     // return;
-    this.shown = JSON.parse(localStorage.getItem('bannerPopup'));
+    this.shown = JSON.parse(sessionStorage.getItem('bannerPopup'));
     console.log(this.shown)
     if(this.shown) return;
     this.attachShadow({mode:'open'});
@@ -1106,7 +1106,7 @@ class bannerPopup extends HTMLElement{
       this.style.setProperty('display','none');
     }, 500);
 
-    localStorage.setItem('bannerPopup', true);
+    sessionStorage.setItem('bannerPopup', true);
   }
 
 }
