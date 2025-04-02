@@ -254,7 +254,7 @@ a {
   }
 
   .hdt-fz3 {
-    font-size: 70px;
+    font-size: 45px;
   }
 
   .hdt-fz4 {
@@ -342,6 +342,9 @@ a {
     padding-left: 55px !important;
     padding-right: 55px !important;
   }
+  .hdt-fz3{
+    font-size: 55px;
+  }
 
 }
 
@@ -378,7 +381,6 @@ a {
   .hdt-fz3 {
     font-size: 100px;
   }
-
   .hdt-fz4 {
     font-size: 70px;
   }
@@ -989,10 +991,10 @@ picture {
   width: 750px;
   overflow: hidden;
   top: 15%;
-  left: 0;
-  -webkit-transform: rotate(45deg);
-  -ms-transform: rotate(45deg);
-  transform: rotate(45deg);
+  right: 0;
+  -webkit-transform: rotate(130deg);
+  -ms-transform: rotate(130deg);
+  transform: rotate(130deg);
   pointer-events: none;
   z-index: -1;
 }
@@ -1000,12 +1002,14 @@ picture {
 .galaxy_eff_svg {
   position: absolute;
   top: 0;
-  left: 0;
+  right: 0;
   overflow: hidden;
   pointer-events: none;
   z-index: -1;
   width: 735px;
   max-width: 100%;
+  transform: rotateY(180deg) translate(0%, -25%);
+
 }
 
 @-webkit-keyframes move_right {
@@ -2329,7 +2333,7 @@ cursor {
 
 @media (max-width: 767px) {
   main {
-    overflow-x: hidden;
+    /* overflow-x: hidden; */
   }
 
   .iphone {

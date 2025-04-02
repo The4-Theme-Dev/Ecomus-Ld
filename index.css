@@ -132,12 +132,18 @@ header {
 /* 2. main */
 /* banner */
 .banner .section-inner {
-  padding-top: 130px;
+  padding-top: 100px;
   padding-bottom: 116px;
-  text-align: center;
+  /* text-align: center; */
   position: relative;
+  background: none;
+  /* overflow: hidden; */
 }
-
+@media (min-width: 1740px){
+  .banner .hdt-fz3{
+    font-size: 80px !important;
+  }
+}
 .banner .banner_svg_linear {
   position: absolute;
   width: 938px;
@@ -249,14 +255,7 @@ header {
 
 .banner .revolutions {
   position: relative;
-  background: -o-linear-gradient(359deg,
-      #76f5bc 4.7%,
-      #221df3 30.85%,
-      #ebeef9 52.07%);
-  background: linear-gradient(91deg,
-      #76f5bc 4.7%,
-      #221df3 30.85%,
-      #ebeef9 52.07%);
+  background: linear-gradient(93deg, #FF9C8D -0.14%, #D655A5 60.95%, #6053CB 100%);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -277,7 +276,20 @@ header {
 .banner p {
   font-size: 20px;
   font-weight: 400;
-  margin-bottom: 60px;
+  margin-bottom: 50px;
+}
+@media (max-width: 1500px){
+  .banner p{
+    font-size: 18px;
+  }
+  .banner p br{
+    display: none;
+  }
+}
+@media (max-width: 1024px){
+  .earth img{
+    height: 1000px;
+  }
 }
 
 .banner .hdt-btn {
@@ -288,6 +300,24 @@ header {
 .banner .hdt-btn.hdt-btn-outline {
   padding: 16px 34px 16px 27px;
 }
+.flash_sale{
+  margin-inline-start: 4px;
+  position: relative;
+  font-weight: 300;
+}
+.flash_sale::before{
+  position: absolute;
+  content: "";
+  width: 120%;
+  height: .1rem;
+  background: #fff;
+  display: block;
+  z-index: 22;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(145deg);
+  opacity: 0.7;
+}
 
 .banner .banner-btn {
   display: -webkit-box;
@@ -295,12 +325,16 @@ header {
   display: flex;
   -webkit-box-pack: center;
   -ms-flex-pack: center;
-  justify-content: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
   align-items: center;
   gap: 13px;
-  margin-bottom: 117px;
+  /* margin-bottom: 117px; */
+}
+.banner .clx-grid{
+  display: grid;
+  grid-template-columns: 7fr 6fr;
+}
+.banner .wrap-version svg{
+  width: 100%;
 }
 
 .banner .banner_demo {
@@ -310,6 +344,7 @@ header {
   margin: 0 auto;
   z-index: 3;
   position: relative;
+  margin-top: 100px;
 }
 
 .banner .banner_demo-img-wrap {
@@ -4616,6 +4651,12 @@ popup counter {
     max-width: 250px;
     overflow: hidden;
   }
+  .banner .banner_demo{
+    margin-top: 40px;
+  }
+  .banner .section-inner{
+    padding-top: 50px;
+  }
 
 
   .empower_grid .item2 .title {
@@ -4739,9 +4780,20 @@ popup counter {
   }
 
   .section-inner br {
-    display: none;
+    /* display: none; */
+  }
+  .banner .clx-grid{
+    grid-template-columns: 1fr;
   }
 
+  .banner .wrap-version svg{
+    width: min(500px,80vw);
+    margin: 0 auto;
+    display: block;
+  }
+  .earth img{
+    height: 1400px;
+  }
   .empower .col-inner .text_bg .gradient {
     font-size: 50px;
   }
@@ -5321,13 +5373,16 @@ popup counter {
   }
 
   .banner .section-inner {
-    padding-top: 100px;
+    padding-top: 40px;
   }
 
   .banner .banner-btn {
-    margin-bottom: 70px;
+    /* margin-bottom: 70px; */
+    margin-bottom: 20px;
   }
-
+  .earth img{
+    height: 1000px;
+  }
   .hdt-btn {
     font-size: 14px;
   }
@@ -6670,4 +6725,13 @@ clx-banner-popup > *{
   height: 100%;
   background: linear-gradient(90deg, rgba(0,0,0,0.8) 0%, #FFF52D 37.78%, #FFF52D 63.24%, rgba(0,0,0,0.8) 100%);
 ;
+}
+
+.earth{
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  margin-top: calc(var(--header-height,80px) * -1);
+  z-index: -1;
 }

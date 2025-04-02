@@ -989,6 +989,16 @@ class SnowBall extends HTMLElement{
 }
 customElements.define('snow-ball',SnowBall);
 
+class headerCustom extends HTMLElement{
+  constructor(){
+    super();
+    
+  }
+  connectedCallback(){
+    document.body.style.setProperty("--header-height", `${this.clientHeight}px`)
+  }
+}
+customElements.define('header-custom', headerCustom);
 
 // banner popup
 class bannerPopup extends HTMLElement{
