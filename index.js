@@ -1045,7 +1045,9 @@ class bannerPopup extends HTMLElement{
         }
         .body{
           width: min(700px, 95vw);
-          aspect-ratio: 1280/650;
+          aspect-ratio: 750/500;
+          border-radius: 10px;
+          overflow:hidden;
         }
         button.close{
           position: absolute;
