@@ -1010,7 +1010,7 @@ class bannerPopup extends HTMLElement{
   }
   constructor(){
     super();
-    // return;
+    return;
     this.shown = JSON.parse(sessionStorage.getItem('bannerPopup'));
     console.log(this.shown)
     if(this.shown) return;
