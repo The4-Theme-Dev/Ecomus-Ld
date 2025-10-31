@@ -127,6 +127,7 @@ header {
   -ms-transform: translateX(0);
   transform: translateX(0);
   opacity: 1;
+  cursor: url('./assets/images/cursor-close.svg') 25 25, auto;
 }
 
 /* 2. main */

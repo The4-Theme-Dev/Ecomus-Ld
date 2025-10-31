@@ -1369,6 +1369,7 @@ popup .overlay {
   left: 0;
   background-color: rgba(0, 0, 0, .5);
   z-index: -1;
+  cursor: url('./assets/images/cursor-close.svg') 25 25, auto;
 }
 
 popup .content {
@@ -1801,6 +1802,7 @@ sidebar_menu_mb.active .overlay {
   opacity: 1;
   visibility: visible;
   pointer-events: auto;
+  cursor: url('./assets/images/cursor-close.svg') 25 25, auto;
 }
 
 sidebar_menu_mb.active .close_btn {
@@ -1822,6 +1824,7 @@ sidebar_menu_mb .overlay {
   transition: opacity .25s ease-in;
   will-change: opacity;
   visibility: hidden;
+  cursor: url('./assets/images/cursor-close.svg') 25 25, auto;
 }
 
 sidebar_menu_mb .content {
@@ -2457,6 +2460,7 @@ cursor {
   -webkit-transition: opacity .25s ease-in;
   -o-transition: opacity .25s ease-in;
   transition: opacity .25s ease-in;
+  cursor: url('./assets/images/cursor-close.svg') 25 25, auto;
 }
 
 .pass_pop.open .overlay {
@@ -2610,6 +2614,7 @@ cursor {
   -webkit-transition-delay: .25s;
   -o-transition-delay: .25s;
   transition-delay: .25s;
+  cursor: url('./assets/images/cursor-close.svg') 25 25, auto;
 }
 
 .partner-pop.open .overlay {
@@ -3190,6 +3195,7 @@ multi-brand-video .overlay {
   inset: 0;
   background-color: rgba(0, 0, 0, 0.8);
   /* backdrop-filter: blur(10px); */
+  cursor: url('./assets/images/cursor-close.svg') 25 25, auto;
 }
 
 multi-brand-video[open] {

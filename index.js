@@ -1010,8 +1010,9 @@ class bannerPopup extends HTMLElement{
   }
   constructor(){
     super();
-    return;
-    this.shown = JSON.parse(sessionStorage.getItem('bannerPopup'));
+    // return;
+    this._id = this.getAttribute('id');
+    this.shown = JSON.parse(sessionStorage.getItem(this._id));
     console.log(this.shown)
     if(this.shown) return;
     this.attachShadow({mode:'open'});
@@ -1033,7 +1034,7 @@ class bannerPopup extends HTMLElement{
             backdrop-filter: blur(3px);
           opacity: 0;
           transition: .2s ease-in-out;
-          cursor: pointer;
+          cursor: url('./assets/images/cursor-close.svg') 25 25, auto;
         }
         .content{
 
@@ -1118,7 +1119,7 @@ class bannerPopup extends HTMLElement{
       this.style.setProperty('display','none');
     }, 500);
 
-    sessionStorage.setItem('bannerPopup', true);
+    sessionStorage.setItem(this._id, true);
   }
 
 }
