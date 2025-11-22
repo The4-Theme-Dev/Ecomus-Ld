@@ -1045,8 +1045,8 @@ class bannerPopup extends HTMLElement{
           transition: .3s ease-in-out;
         }
         .body{
-          width: min(700px, 95vw);
-          aspect-ratio: 1;
+          width: min(750px, 95vw);
+          // aspect-ratio: 1;
           border-radius: 10px;
           overflow:hidden;
         }
