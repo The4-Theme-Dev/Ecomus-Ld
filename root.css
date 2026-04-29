@@ -2163,7 +2163,7 @@ cursor {
   width: -moz-fit-content;
   width: fit-content;
   position: relative;
-  border-radius: 50px;
+  border-radius: 30px;
   border: 5px solid #1a1a1a;
   /* border: 5px solid #1a1a1a; */
   margin-bottom: 30px;
@@ -2177,7 +2177,7 @@ cursor {
   display: flex;
   max-width: 320px;
   overflow: hidden;
-  border-radius: 46px;
+  border-radius: 25px;
   overflow: hidden;
 }
 
